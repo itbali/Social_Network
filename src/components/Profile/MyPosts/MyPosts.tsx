@@ -6,7 +6,7 @@ export const MyPosts = () => {
         <div>
             My Posts
             <div>
-                <textarea> </textarea>
+                <textarea placeholder='some text'></textarea>
                 <button>Add Post</button>
             </div>
             <div className={s.Posts}>Posts

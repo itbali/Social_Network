@@ -1,9 +1,8 @@
 import React from 'react';
 import s from './Dialogs.module.css';
 
-type DialogsPropsType = any;
 
-export const Dialogs = (props: DialogsPropsType) => {
+export const Dialogs = () => {
     return (
         <div>
             Dialogs

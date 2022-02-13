@@ -7,16 +7,20 @@
 }
 
 .item {
+    transition: 0.3s;
     display: flex;
     color: white;
     margin-bottom: 10px;
     border: 1px solid rgba(0, 0, 0, 0);
+    height: 40px;
+    /*width: 40px;*/
 }
 
 .item:hover {
+    transition: 0.3s;
     border: 1px solid white;
     border-radius: 10px;
-    font-weight: 600;
+    /*font-weight: 600;*/
 }
 
 .nav div svg {
@@ -32,8 +36,17 @@
 }
 
 .active {
-    font-weight: bold;
+    transition: 0.3s;
+    font-weight: 700;
     border-radius: 10px;
     border: 2px solid white;
     /*color: darkgoldenrod;*/
+}
+
+.active:hover {
+    transition: 0.3s;
+    font-weight: 700;
+    border-radius: 10px;
+    border: 2px solid white;
+
 }

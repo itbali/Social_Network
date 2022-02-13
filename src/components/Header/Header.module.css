@@ -1,8 +1,21 @@
 .header {
     /*background-color: aqua;*/
     grid-area: h;
+    padding-top: 15px;
+    /*margin-left: 10px;*/
+    /*background-color: aqua;*/
 }
 
-.header img {
-    width: 50px;
+.header .logo {
+    font-family: 'Comfortaa', cursive;
+    margin-left: 14px;
+    box-sizing: border-box;
+    border: 5px solid white;
+    border-radius: 20px 2px 20px 2px;
+    padding: 5px;
+    color: white;
+    font-weight: 700;
+    font-size: 40px;
+    text-transform: uppercase;
+    display: inline;
 }
