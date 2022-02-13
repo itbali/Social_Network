@@ -1,0 +1,39 @@
+.nav {
+    background: rgb(61, 65, 215);
+    box-shadow: 0px 14px 34px rgba(34, 37, 169, 0.4);
+    border-radius: 20px;
+    padding: 13px;
+    grid-area: n;
+}
+
+.item {
+    display: flex;
+    color: white;
+    margin-bottom: 10px;
+    border: 1px solid rgba(0, 0, 0, 0);
+}
+
+.item:hover {
+    border: 1px solid white;
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+.nav div svg {
+    padding: 10px;
+}
+
+.nav div a {
+    display: flex;
+    align-items: center;
+    color: inherit;
+    font-size: 22px;
+    text-decoration: none;
+}
+
+.active {
+    font-weight: bold;
+    border-radius: 10px;
+    border: 2px solid white;
+    /*color: darkgoldenrod;*/
+}
