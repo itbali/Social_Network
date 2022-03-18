@@ -1,52 +1,52 @@
 .nav {
-    background: rgb(61, 65, 215);
-    box-shadow: 0px 14px 34px rgba(34, 37, 169, 0.4);
+    background: #33359b;
     border-radius: 20px;
-    padding: 13px;
+    box-shadow: 0px 14px 34px rgba(34, 37, 169, 0.75);
+    color: white;
     grid-area: n;
-}
+    height: fit-content;
+    margin-left: 10px;
+    padding: 13px;
+    }
 
 .item {
-    transition: 0.3s;
     display: flex;
-    color: white;
-    margin-bottom: 10px;
-    border: 1px solid rgba(0, 0, 0, 0);
-    height: 40px;
-    /*width: 40px;*/
-}
-
-.item:hover {
+    margin: 10px 0;
     transition: 0.3s;
-    border: 1px solid white;
-    border-radius: 10px;
-    /*font-weight: 600;*/
-}
+    }
 
-.nav div svg {
+
+.item svg {
     padding: 10px;
-}
+    }
 
-.nav div a {
-    display: flex;
+.nav a {
+    box-sizing: border-box;
     align-items: center;
+    border: 1px solid rgba(0, 0, 0, 0);
+    border-radius: 10px;
     color: inherit;
+    display: flex;
     font-size: 22px;
+    height: 40px;
     text-decoration: none;
-}
+    width: 170px;
+    }
 
-.active {
+.nav a:hover {
+    border: 1px solid white;
     transition: 0.3s;
-    font-weight: 700;
-    border-radius: 10px;
-    border: 2px solid white;
-    /*color: darkgoldenrod;*/
-}
+    }
 
-.active:hover {
+.nav a span {
+    margin: auto;
+    }
+
+.nav a.active {
+    border: 2px solid white;
+    border-radius: 10px;
+    font-weight: 500;
     transition: 0.3s;
-    font-weight: 700;
-    border-radius: 10px;
-    border: 2px solid white;
+    color: darkgoldenrod;
+    }
 
-}

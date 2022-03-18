@@ -8,26 +8,33 @@ import {Profile} from "./components/Profile/Profile";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
 import {News} from "./components/News/News";
+import {actionType, stateType} from "./redux/state";
 
-const App = () => {
+type AppPropsType = {
+    store: stateType
+    dispatch: (action: actionType) => void
+}
+
+
+const App = (props: AppPropsType) => {
     return (
-        <BrowserRouter>
-            <div className='app-wrapper'>
-                <Header/>
-                <Navbar/>
-                <div className='app-wrapper-content'>
-                    <Routes>
-                        <Route path='/profile' element={<Profile/>}/>
-                        <Route path='/dialogs' element={<Dialogs/>}/>
-                        <Route path='/news' element={<News/>}/>
-                        <Route path='/music' element={<Music/>}/>
-                        <Route path='/settings' element={<Settings/>}/>
-                    </Routes>
-                    {/*<Profile/>*/}
-                    {/*<Dialogs/>*/}
-                </div>
+        <div className='app-wrapper'>
+            <Header/>
+            <Navbar/>
+            <div className='app-wrapper-content'>
+                <Routes>
+                    <Route path='/profile'
+                           element={<Profile ProfilePage={props.store.ProfilePage}
+                                             dispatch={props.dispatch}
+                           />}/>
+                    <Route path='/dialogs/*'
+                           element={<Dialogs state={props.store.DialogsPage}/>}/>
+                    <Route path='/news' element={<News/>}/>
+                    <Route path='/music' element={<Music/>}/>
+                    <Route path='/settings' element={<Settings/>}/>
+                </Routes>
             </div>
-        </BrowserRouter>
+        </div>
     );
 }
 

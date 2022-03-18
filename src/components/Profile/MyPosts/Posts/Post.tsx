@@ -11,7 +11,7 @@ export const Post = (props: PostPropsType) => {
 
         <div>
             <div className={s.item}>
-                <img src={props.img}
+                <img alt={''} src={props.img}
                 />
                 {props.message}
             </div>
