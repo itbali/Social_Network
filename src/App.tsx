@@ -28,7 +28,9 @@ const App = (props: AppPropsType) => {
                                              dispatch={props.dispatch}
                            />}/>
                     <Route path='/dialogs/*'
-                           element={<Dialogs state={props.store.DialogsPage}/>}/>
+                           element={<Dialogs state={props.store.DialogsPage}
+                                             dispatch={props.dispatch}
+                           />}/>
                     <Route path='/news' element={<News/>}/>
                     <Route path='/music' element={<Music/>}/>
                     <Route path='/settings' element={<Settings/>}/>

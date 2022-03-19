@@ -1,6 +1,6 @@
 import s from './MyPosts.module.css'
 import {Post} from "./Posts/Post";
-import {actionType, singlePostType} from "../../../redux/state";
+import {actionType, AddPostActionCreator, onPostChangeActionCreator, singlePostType} from "../../../redux/state";
 import React, {ChangeEvent} from "react";
 
 
@@ -10,17 +10,12 @@ type MyPostsPropsType = {
     NewPostText: string
 }
 
+
 export const MyPosts = (props: MyPostsPropsType) => {
 
-    // let newPostRef = React.createRef<HTMLTextAreaElement>()
 
     const addPost = () => {
-        // if (!!newPostRef.current?.value) {
-        //     let postText = newPostRef.current.value
-        //     postText &&
-        // props.addPost()
-        // }
-        props.dispatch({type: 'ADD-POST'})
+        props.dispatch(AddPostActionCreator())
     }
 
     const PostsArray = props.Posts.map(p => {
@@ -34,9 +29,9 @@ export const MyPosts = (props: MyPostsPropsType) => {
     })
 
     let onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.dispatch({type: "UPDATE-CHANGE-TEXT", newText: (e.currentTarget.value)})
-        // props.updateChangeText(e.currentTarget.value)
+        props.dispatch(onPostChangeActionCreator(e))
     }
+
     return (
         <div>
             My Posts
@@ -51,11 +46,6 @@ export const MyPosts = (props: MyPostsPropsType) => {
             </div>
             <div className={s.Posts}>Posts
                 {PostsArray}
-                {/*<Post*/}
-                {/*    message={props.Posts[1].postMessage}*/}
-                {/*    img={props.Posts[1].img}*/}
-                {/*    likeCount={props.Posts[1].likeCount}*/}
-                {/*/>*/}
             </div>
         </div>
     )

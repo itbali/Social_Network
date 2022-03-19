@@ -1,3 +1,10 @@
+import {ChangeEvent} from "react";
+
+const UPDATE_CHANGE_TEXT = "UPDATE-CHANGE-TEXT"
+const ADD_POST = 'ADD-POST';
+const ADD_MESSAGE_TEXT = 'ADD-MESSAGE-TEXT';
+const SEND_MESSAGE = 'SEND_MESSAGE';
+
 export type DialogItemType = {
     id: number, name: string
 }
@@ -15,10 +22,11 @@ export type stateType = {
     DialogsPage: {
         dialogData: Array<DialogItemType>
         messageData: Array<MessageItemType>
+        inputMessageText: string
     }
 }
 export type actionType = {
-    type: 'ADD-POST' | 'UPDATE-CHANGE-TEXT'
+    type: 'ADD-POST' | 'UPDATE-CHANGE-TEXT' | 'ADD-MESSAGE-TEXT' | 'SEND_MESSAGE'
     newText?: string
 }
 export type storeType = {
@@ -31,7 +39,7 @@ export type storeType = {
     dispatch: (action: actionType) => void
 }
 
-export let store: storeType = {
+export const store: storeType = {
     _state: {
         ProfilePage: {
             Posts: [
@@ -63,6 +71,7 @@ export let store: storeType = {
                 {id: 3, message: "How is your dog?"},
                 {id: 4, message: "Write me please..."}
             ],
+            inputMessageText: '',
         }
     },
     _callSubscriber() {
@@ -76,23 +85,6 @@ export let store: storeType = {
         return this._state
     },
 
-    // addPost() {
-    //     let newPost = {
-    //         id: 5,
-    //         postMessage: this._state.ProfilePage.NewPostText,
-    //         img: '',
-    //         likeCount: 0
-    //     }
-    //
-    //     this._state.ProfilePage.Posts.push(newPost)
-    //     this._state.ProfilePage.NewPostText = ''
-    //     this._callSubscriber(this._state)
-    // },
-    // updateChangeText(newText: string) {
-    //     this._state.ProfilePage.NewPostText = newText
-    //     this._callSubscriber(this._state)
-    // },
-
     dispatch(action: actionType) {
         switch (action.type) {
             case 'ADD-POST':
@@ -102,23 +94,54 @@ export let store: storeType = {
                     img: '',
                     likeCount: 0
                 }
-
                 this._state.ProfilePage.Posts.push(newPost)
                 this._state.ProfilePage.NewPostText = ''
                 this._callSubscriber(this._state)
                 break;
+
             case 'UPDATE-CHANGE-TEXT':
                 if (action.newText != null) {
                     this._state.ProfilePage.NewPostText = action.newText
                 }
                 this._callSubscriber(this._state)
                 break;
+
+            case 'ADD-MESSAGE-TEXT':
+                if (action.newText != null) {
+                    this._state.DialogsPage.inputMessageText = action.newText
+                }
+                this._callSubscriber(this._state)
+                break;
+
+            case 'SEND_MESSAGE':
+                let newMessage = this._state.DialogsPage.inputMessageText
+                this._state.DialogsPage.messageData.push({id: 100, message: newMessage})
+                this._state.DialogsPage.inputMessageText = ''
+                this._callSubscriber(this._state)
+                break
+
             default:
                 this._callSubscriber(this._state)
         }
     }
-
 }
 
 
+export const AddPostActionCreator = () => {
+    let action: actionType = {type: ADD_POST}
+    return action
+}
+export const onPostChangeActionCreator = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    let action: actionType = {type: UPDATE_CHANGE_TEXT, newText: e.currentTarget.value}
+    return action
+}
 
+export const onMessageChangeTextActionCreator = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    let action: actionType = {type: ADD_MESSAGE_TEXT, newText: e.currentTarget.value}
+    return action
+}
+
+export const onSendMessageActionCreator = () => {
+    let action: actionType = {type: SEND_MESSAGE}
+    return action
+}

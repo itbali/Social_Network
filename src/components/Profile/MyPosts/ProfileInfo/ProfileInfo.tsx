@@ -5,9 +5,9 @@ const ProfileInfo = () => {
     return (
         <div>
             <div>
-                <img
-                    src="https://www.travelanddestinations.com/wp-content/uploads/2019/11/Beach-Destinations-in-Asia.jpg"
-                    alt=""/>
+                <img style={{width: '900px', height: '300px', objectFit: 'cover'}}
+                     src="https://letstrvl.com/posts/x1600/%D0%9F%D0%BB%D1%8F%D0%B6_%D0%91%D0%B0%D0%BB%D0%B8%D0%B0%D0%BD_%D1%81_%D0%B2%D1%83%D0%BB%D0%BA%D0%B0%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%BC_%D0%BF%D0%B5%D1%81%D0%BA%D0%BE%D0%BC_%D0%BD%D0%B0_%D0%91%D0%B0%D0%BB%D0%B8-4yQjT.jpg"
+                     alt=""/>
             </div>
             <div className={s.discriptionBlock}>
                 <img

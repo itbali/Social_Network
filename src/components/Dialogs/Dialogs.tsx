@@ -1,14 +1,22 @@
-import React, {createRef} from 'react';
+import React, {ChangeEvent, createRef} from 'react';
 import s from './Dialogs.module.css';
 import {DialogItem,} from "./DialogItem/DialogItem";
 import {Message,} from "./Message/Message";
-import {DialogItemType, MessageItemType} from "../../redux/state";
+import {
+    actionType,
+    DialogItemType,
+    MessageItemType,
+    onMessageChangeTextActionCreator,
+    onSendMessageActionCreator
+} from "../../redux/state";
 
 type DialogsPropsType = {
     state: {
         messageData: Array<MessageItemType>
         dialogData: Array<DialogItemType>
+        inputMessageText: string
     }
+    dispatch: (action: actionType) => void
 
 }
 
@@ -16,11 +24,14 @@ export const Dialogs = (props: DialogsPropsType) => {
 
     let DialogsElements = props.state.dialogData.map(el => <DialogItem name={el.name} id={el.id}/>)
     let MessagesElements = props.state.messageData.map(el => <Message message={el.message}/>)
-
-
-    let messageText = createRef<HTMLTextAreaElement>()
+    
     let sendMessage = () => {
-        alert(messageText.current?.value)
+        props.dispatch(onSendMessageActionCreator())
+    }
+
+
+    const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        props.dispatch(onMessageChangeTextActionCreator(e))
     }
 
     return (
@@ -32,7 +43,7 @@ export const Dialogs = (props: DialogsPropsType) => {
             <div className={s.messages}>
                 {MessagesElements}
                 <div>
-                    <textarea ref={messageText}/>
+                    <textarea value={props.state.inputMessageText} onChange={onChangeHandler}/>
                     <button onClick={sendMessage}>Send</button>
                 </div>
             </div>
