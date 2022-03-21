@@ -1,14 +1,9 @@
-import React, {ChangeEvent, createRef} from 'react';
+import React, {ChangeEvent} from 'react';
 import s from './Dialogs.module.css';
 import {DialogItem,} from "./DialogItem/DialogItem";
 import {Message,} from "./Message/Message";
-import {
-    actionType,
-    DialogItemType,
-    MessageItemType,
-    onMessageChangeTextActionCreator,
-    onSendMessageActionCreator
-} from "../../redux/state";
+import {actionType, DialogItemType, MessageItemType} from "../../redux/store";
+import {onMessageChangeTextActionCreator, onSendMessageActionCreator} from "../../redux/DialogsReducer";
 
 type DialogsPropsType = {
     state: {
@@ -24,7 +19,7 @@ export const Dialogs = (props: DialogsPropsType) => {
 
     let DialogsElements = props.state.dialogData.map(el => <DialogItem name={el.name} id={el.id}/>)
     let MessagesElements = props.state.messageData.map(el => <Message message={el.message}/>)
-    
+
     let sendMessage = () => {
         props.dispatch(onSendMessageActionCreator())
     }

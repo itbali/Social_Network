@@ -1,7 +1,8 @@
 import s from './MyPosts.module.css'
 import {Post} from "./Posts/Post";
-import {actionType, AddPostActionCreator, onPostChangeActionCreator, singlePostType} from "../../../redux/state";
+import {actionType, singlePostType} from "../../../redux/store";
 import React, {ChangeEvent} from "react";
+import {AddPostActionCreator, onPostChangeActionCreator} from "../../../redux/ProfileReducer";
 
 
 type MyPostsPropsType = {
@@ -29,6 +30,7 @@ export const MyPosts = (props: MyPostsPropsType) => {
     })
 
     let onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+
         props.dispatch(onPostChangeActionCreator(e))
     }
 
