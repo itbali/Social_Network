@@ -1,4 +1,4 @@
-import {combineReducers, createStore} from "redux";
+import {combineReducers, createStore, Store} from "redux";
 import {ProfileReducer} from "./ProfileReducer";
 import {DialogsReducer} from "./DialogsReducer";
 import {SidebarReducer} from "./SidebarReducer";
@@ -9,9 +9,9 @@ let reducers = combineReducers({
     SideBar: SidebarReducer,
 })
 
-export let store = createStore(reducers)
+export let store: Store = createStore(reducers)
 
-export type RootStoreType = ReturnType<typeof reducers>
+export type RootStateType = ReturnType<typeof reducers>
 
 //@ts-ignore
-window.store = store
+window.reduxStore = store

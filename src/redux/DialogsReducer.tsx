@@ -1,8 +1,18 @@
-import {actionType, DialogsPageType} from "./store";
-import {ChangeEvent} from "react";
-
 const ADD_MESSAGE_TEXT = 'ADD-MESSAGE-TEXT';
 const SEND_MESSAGE = 'SEND_MESSAGE';
+
+export type DialogsPageType = {
+    dialogData: Array<DialogItemType>
+    messageData: Array<MessageItemType>
+    inputMessageText: string
+}
+
+export type DialogItemType = {
+    id: number, name: string
+}
+export type MessageItemType = {
+    id: number, message: string
+}
 
 let InitialState: DialogsPageType = {
     dialogData: [
@@ -20,7 +30,7 @@ let InitialState: DialogsPageType = {
     inputMessageText: '',
 }
 
-export const DialogsReducer = (state: DialogsPageType = InitialState, action: actionType): DialogsPageType => {
+export const DialogsReducer = (state: DialogsPageType = InitialState, action: ActionsType): DialogsPageType => {
     switch (action.type) {
         case 'ADD-MESSAGE-TEXT': {
             if (action.newText != null) {
@@ -37,13 +47,11 @@ export const DialogsReducer = (state: DialogsPageType = InitialState, action: ac
 
     }
 }
+type ActionsType = ReturnType<typeof onMessageChangeTextActionCreator> | ReturnType<typeof onSendMessageActionCreator>
+export const onMessageChangeTextActionCreator = (text: string) =>
+    ({type: ADD_MESSAGE_TEXT, newText: text} as const)
 
-export const onMessageChangeTextActionCreator = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    let action: actionType = {type: ADD_MESSAGE_TEXT, newText: e.currentTarget.value}
-    return action
-}
 
-export const onSendMessageActionCreator = () => {
-    let action: actionType = {type: SEND_MESSAGE}
-    return action
-}
+export const onSendMessageActionCreator = () =>
+    ({type: SEND_MESSAGE} as const)
+

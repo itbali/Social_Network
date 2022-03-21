@@ -2,35 +2,35 @@ import {ProfileReducer} from "./ProfileReducer";
 import {DialogsReducer} from "./DialogsReducer";
 import {SidebarReducer} from "./SidebarReducer";
 
-export type DialogItemType = {
+type DialogItemType = {
     id: number, name: string
 }
-export type MessageItemType = {
+type MessageItemType = {
     id: number, message: string
 }
-export type singlePostType = {
+type SinglePostType = {
     id: number, postMessage: string, img: string, likeCount: number
 }
-export type ProfilePageType = {
-    Posts: singlePostType[]
+type ProfilePageType = {
+    Posts: SinglePostType[]
     NewPostText: string
 }
-export type DialogsPageType = {
+type DialogsPageType = {
     dialogData: Array<DialogItemType>
     messageData: Array<MessageItemType>
     inputMessageText: string
 }
-export type SideBarType = {}
-export type stateType = {
+type SideBarType = {}
+type stateType = {
     ProfilePage: ProfilePageType
     DialogsPage: DialogsPageType
     SideBar: SideBarType
 }
-export type actionType = {
+type actionType = {
     type: 'ADD-POST' | 'UPDATE-CHANGE-TEXT' | 'ADD-MESSAGE-TEXT' | 'SEND_MESSAGE'
     newText?: string
 }
-export type storeType = {
+type storeType = {
     _state: stateType,
     _callSubscriber: (state: stateType) => void,
     getState: () => stateType
@@ -38,7 +38,7 @@ export type storeType = {
     dispatch: (action: actionType) => void
 }
 
-export const store: storeType = {
+const store: storeType = {
     _state: {
         ProfilePage: {
             Posts: [
@@ -85,10 +85,13 @@ export const store: storeType = {
         return this._state
     },
 
-    dispatch(action: actionType) {
+    dispatch(action: any) {
         this._state.ProfilePage = ProfileReducer(this._state.ProfilePage, action)
         this._state.DialogsPage = DialogsReducer(this._state.DialogsPage, action)
         this._state.SideBar = SidebarReducer(this._state.SideBar, action)
         this._callSubscriber(this._state);
     }
 }
+
+// @ts-ignore
+window.store = store

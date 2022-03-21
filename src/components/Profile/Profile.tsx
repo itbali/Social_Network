@@ -1,25 +1,22 @@
-import s from './Profile.module.css'
 import ProfileInfo from "./MyPosts/ProfileInfo/ProfileInfo";
-import {MyPosts} from "./MyPosts/MyPosts";
-import {actionType, singlePostType} from "../../redux/store";
+import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
+import {ProfilePageType} from "../../redux/ProfileReducer";
+import {Dispatch} from "redux";
 
 
 type ProfilePropsType = {
-    ProfilePage: {
-        Posts: singlePostType[];
-        NewPostText: string
-    }
-    dispatch: (action: actionType) => void
+    profilePage: ProfilePageType
+    dispatch: Dispatch
 }
 
 export const Profile = (props: ProfilePropsType) => {
     return (
         <div>
             <ProfileInfo/>
-            <MyPosts
-                Posts={props.ProfilePage.Posts}
+            <MyPostsContainer
+                posts={props.profilePage.Posts}
                 dispatch={props.dispatch}
-                NewPostText={props.ProfilePage.NewPostText}
+                newPostText={props.profilePage.NewPostText}
             />
         </div>
     )

@@ -1,9 +1,13 @@
-import {actionType, ProfilePageType} from "./store";
-import {ChangeEvent} from "react";
-
-
 const UPDATE_CHANGE_TEXT = "UPDATE-CHANGE-TEXT"
 const ADD_POST = 'ADD-POST';
+
+export type SinglePostType = {
+    id: number, postMessage: string, img: string, likeCount: number
+}
+export type ProfilePageType = {
+    Posts: SinglePostType[]
+    NewPostText: string
+}
 
 let InitialState: ProfilePageType = {
     Posts: [
@@ -23,7 +27,7 @@ let InitialState: ProfilePageType = {
     NewPostText: 'удалить значение из store.tsx'
 }
 
-export const ProfileReducer = (state: ProfilePageType = InitialState, action: actionType) => {
+export const ProfileReducer = (state: ProfilePageType = InitialState, action: ActionsType) => {
     switch (action.type) {
         case ADD_POST: {
             debugger
@@ -47,12 +51,9 @@ export const ProfileReducer = (state: ProfilePageType = InitialState, action: ac
             return state
     }
 }
+type ActionsType = ReturnType<typeof AddPostActionCreator> | ReturnType<typeof onPostChangeActionCreator>
+export const AddPostActionCreator = () =>
+    ({type: ADD_POST} as const)
 
-export const AddPostActionCreator = () => {
-    let action: actionType = {type: ADD_POST}
-    return action
-}
-export const onPostChangeActionCreator = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    let action: actionType = {type: UPDATE_CHANGE_TEXT, newText: e.currentTarget.value}
-    return action
-}
+export const onPostChangeActionCreator = (text: string) =>
+    ({type: UPDATE_CHANGE_TEXT, newText: text} as const)
