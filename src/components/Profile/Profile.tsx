@@ -14,9 +14,9 @@ export const Profile = (props: ProfilePropsType) => {
         <div>
             <ProfileInfo/>
             <MyPostsContainer
-                posts={props.profilePage.Posts}
-                dispatch={props.dispatch}
-                newPostText={props.profilePage.NewPostText}
+                // posts={props.profilePage.Posts}
+                // dispatch={props.dispatch}
+                // newPostText={props.profilePage.NewPostText}
             />
         </div>
     )

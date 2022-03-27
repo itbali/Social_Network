@@ -27,7 +27,7 @@ let InitialState: ProfilePageType = {
     NewPostText: 'удалить значение из store.tsx'
 }
 
-export const ProfileReducer = (state: ProfilePageType = InitialState, action: ActionsType) => {
+export const ProfileReducer = (state: ProfilePageType = InitialState, action: ActionsType): ProfilePageType => {
     switch (action.type) {
         case ADD_POST: {
             debugger
@@ -37,16 +37,16 @@ export const ProfileReducer = (state: ProfilePageType = InitialState, action: Ac
                 img: '',
                 likeCount: 0
             }
-
             state.NewPostText = ''
-
             return {...state, Posts: [...state.Posts, newPost]}
         }
+
         case UPDATE_CHANGE_TEXT: {
-            if (action.newText != null) {
-                return {...state, NewPostText: action.newText}
+            if (action.newText.trim() != null) {
+                return {...state, NewPostText: action.newText.trim()}
             } else return state
         }
+
         default:
             return state
     }

@@ -6,12 +6,13 @@ import {
 } from "../../redux/DialogsReducer";
 import {Message} from "./Message/Message";
 import {DialogItem} from "./DialogItem/DialogItem";
+import {DialogsPropsType} from "./DialogsContainer";
 
-type DialogsPropsType = {
-    dialogsPage: DialogsPageType
-    sendMessage: () => void
-    onChangeHandler: (text: string) => void
-}
+// type DialogsPropsType = {
+//     dialogsPage: DialogsPageType
+//     sendMessage: () => void
+//     onChangeHandler: (text: string) => void
+// }
 
 
 export const Dialogs = (props: DialogsPropsType) => {
@@ -25,8 +26,8 @@ export const Dialogs = (props: DialogsPropsType) => {
         props.onChangeHandler(e.currentTarget.value)
     }
 
-    let DialogsElements = props.dialogsPage.dialogData.map(el => <DialogItem name={el.name} id={el.id}/>)
-    let MessagesElements = props.dialogsPage.messageData.map(el => <Message message={el.message}/>)
+    let DialogsElements = props.DialogsPage.dialogData.map(el => <DialogItem key={el.id} name={el.name} id={el.id}/>)
+    let MessagesElements = props.DialogsPage.messageData.map(el => <Message key={el.id} message={el.message}/>)
 
     return (
         <div className={s.dialogs}>
@@ -37,7 +38,7 @@ export const Dialogs = (props: DialogsPropsType) => {
             <div className={s.messages}>
                 {MessagesElements}
                 <div>
-                    <textarea value={props.dialogsPage.inputMessageText} onChange={onChangeHandler}/>
+                    <textarea value={props.DialogsPage.inputMessageText} onChange={onChangeHandler}/>
                     <button onClick={sendMessageHandler}>Send</button>
                 </div>
             </div>

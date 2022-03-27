@@ -21,6 +21,7 @@ export const MyPosts = (props: MyPostsPropsType) => {
     const PostsArray = props.Posts.map(p => {
         return (
             <Post
+                key={p.id}
                 message={p.postMessage}
                 img={p.img}
                 likeCount={p.likeCount}

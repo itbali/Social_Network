@@ -12,7 +12,6 @@ import {Dispatch, Store} from "redux";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 
 type AppPropsType = {
-    state: RootStateType
     dispatch: Dispatch
     store: Store
 }
@@ -30,8 +29,9 @@ const App = (props: AppPropsType) => {
                                              dispatch={props.dispatch}
                            />}/>
                     <Route path='/dialogs/*'
-                           element={<DialogsContainer dialogsPage={props.store.getState().DialogsPage}
-                                                      dispatch={props.dispatch}
+                           element={<DialogsContainer
+                               // dialogsPage={props.store.getState().DialogsPage}
+                               // dispatch={props.dispatch}
                            />}/>
                     <Route path='/news' element={<News/>}/>
                     <Route path='/music' element={<Music/>}/>
