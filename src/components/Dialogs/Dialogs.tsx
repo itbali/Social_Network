@@ -1,9 +1,5 @@
 import React, {ChangeEvent} from 'react';
 import s from './Dialogs.module.css';
-import {
-    DialogsPageType,
-
-} from "../../redux/DialogsReducer";
 import {Message} from "./Message/Message";
 import {DialogItem} from "./DialogItem/DialogItem";
 import {DialogsPropsType} from "./DialogsContainer";
@@ -14,13 +10,11 @@ import {DialogsPropsType} from "./DialogsContainer";
 //     onChangeHandler: (text: string) => void
 // }
 
-
 export const Dialogs = (props: DialogsPropsType) => {
 
     let sendMessageHandler = () => {
         props.sendMessage()
     }
-
 
     const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         props.onChangeHandler(e.currentTarget.value)

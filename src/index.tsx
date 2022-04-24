@@ -30,5 +30,6 @@ ReactDOM.render(
 // })
 
 
-
+//@ts-ignore
+window.store = store
 

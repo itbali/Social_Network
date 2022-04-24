@@ -15,7 +15,6 @@ import {RootStateType} from "../../redux/redux-store";
 //     dispatch: Dispatch
 //
 // }
-
 // export const DialogsContainer = (props: DialogsContainerPropsType) => {
 //
 //

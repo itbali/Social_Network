@@ -1,6 +1,6 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import s from './Navbar.module.css'
-import {faCog, faComment, faMusic, faNewspaper, faUser} from "@fortawesome/free-solid-svg-icons";
+import {faCog, faComment, faMusic, faNewspaper, faUser, faUsers} from "@fortawesome/free-solid-svg-icons";
 import {NavLink} from "react-router-dom";
 
 
@@ -41,6 +41,13 @@ export const Navbar = () => {
                 <div className={s.item}>
                     <FontAwesomeIcon icon={faCog}/>
                     <span>Настройки</span>
+                </div>
+            </NavLink>
+
+            <NavLink to="/users" className={navData => navData.isActive ? s.active : ''}>
+                <div className={s.item}>
+                    <FontAwesomeIcon icon={faUsers}/>
+                    <span>Друзья</span>
                 </div>
             </NavLink>
 

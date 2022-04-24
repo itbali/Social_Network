@@ -1,0 +1,25 @@
+.userContainer {
+    padding: 10px;
+    margin: 10px;
+    display: flex;
+    border: 1px solid black;
+    }
+
+.left {
+    display: flex;
+    flex-direction: column;
+    }
+
+.avatar {
+    margin: 10px;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 1px solid yellow;
+    object-fit: cover;
+    }
+
+.selectedPage {
+    font-weight: bold;
+    font-size: 1.1em;
+    }

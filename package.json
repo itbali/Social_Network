@@ -1,5 +1,6 @@
 {
   "name": "my-app",
+  "homepage": "https://itbali.github.io/Social_Network",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -15,10 +16,11 @@
     "@types/react-dom": "^17.0.11",
     "@types/react-redux": "^7.1.23",
     "@types/react-router-dom": "^5.3.3",
+    "axios": "^0.26.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.6",
-    "react-router-dom": "^6.2.1",
+    "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.0",
     "redux": "^4.1.2",
     "typescript": "^4.5.5",
@@ -28,7 +30,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
