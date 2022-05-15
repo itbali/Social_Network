@@ -1,6 +1,6 @@
-import {ProfileReducer} from "./ProfileReducer";
-import {DialogsReducer} from "./DialogsReducer";
-import {SidebarReducer} from "./SidebarReducer";
+import {ProfileReducer} from "./profileReducer";
+import {DialogsReducer} from "./dialogsReducer";
+import {SidebarReducer} from "./sidebarReducer";
 
 type DialogItemType = {
     id: number, name: string

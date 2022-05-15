@@ -1,25 +1,31 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Route, Routes} from 'react-router-dom';
 import './App.css';
 import {Navbar} from "./components/Navbar/Navbar";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
 import {News} from "./components/News/News";
-import {Dispatch, Store} from "redux";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import {UsersContainer} from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
 import ProtectedRoute from "./ProtectedRoute";
+import {useDispatch, useSelector} from "react-redux";
+import {RootStateType} from "./redux/redux-store";
+import {initializeApp} from "./redux/appReducer";
+import Preloader from "./components/Common/Preloader/Preloader";
 
-type AppPropsType = {
-    dispatch: Dispatch
-    store: Store
-}
+const App = () => {
+    let initialized = useSelector<RootStateType, boolean>(state => state.App.initialized)
+    const dispatch = useDispatch()
 
+    useEffect(() => {
+        dispatch(initializeApp())
+    }, [])
 
-const App = (props: AppPropsType) => {
+    if (!initialized) return <Preloader/>
+
     return (
         <div className='app-wrapper'>
             <HeaderContainer/>

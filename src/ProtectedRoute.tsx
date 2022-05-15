@@ -1,12 +1,9 @@
 import {Navigate, Outlet, useLocation} from "react-router";
-import Login from "./components/Login/Login";
 import {useSelector} from "react-redux";
 import {RootStateType} from "./redux/redux-store";
 
 const useAuth = () => {
-
-    let isAuth = useSelector<RootStateType, boolean>(state => state.Auth.data.isAuth)
-    return isAuth
+    return useSelector<RootStateType, boolean>(state => state.Auth.data.isAuth)
 }
 
 const ProtectedRoute = () => {

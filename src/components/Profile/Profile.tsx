@@ -1,7 +1,7 @@
 import ProfileInfo from "./MyPosts/ProfileInfo/ProfileInfo";
 import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 import Preloader from "../Common/Preloader/Preloader";
-import {ProfileType} from "../../redux/ProfileReducer";
+import {ProfileType} from "../../redux/profileReducer";
 
 type ProfilePropsType = {
     GetUserProfile: (userID: string) => void

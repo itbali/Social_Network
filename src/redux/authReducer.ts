@@ -17,7 +17,7 @@ export type UserDataType = {
     id: number | null,
     login: string,
     email: string,
-    isAuth: boolean | undefined
+    isAuth: boolean
 }
 
 let InitialState: UserAuthType = {
@@ -67,8 +67,8 @@ const setErrorMessages = (messages: string[]) => {
 export const setAuthUserData = (id: number, login: string, email: string) =>
     ({type: SET_USER_DATA, data: {id, login, email, isAuth: true}} as const)
 
-export const getUserAuthData = () => (dispatch: Dispatch) => {
-    authAPI.me()
+export const getAuthUserData = () => (dispatch: Dispatch) => {
+    return authAPI.me()
         .then((response) => {
             if (response.resultCode === 0) {
                 let {id, login, email} = response.data
@@ -81,7 +81,7 @@ export const login = (login: string, password: string, remember: boolean, setSub
     authAPI.login(login, password, remember)
         .then((data) => {
             if (data.data.resultCode === 0) {
-                dispatch(getUserAuthData())
+                dispatch(getAuthUserData())
             } else {
                 dispatch(setErrorMessages(data.data.messages))
                 setStatus(data.data.messages[0])

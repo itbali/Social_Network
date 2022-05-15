@@ -1,7 +1,7 @@
 import s from './MyPosts.module.css'
 import {Post} from "./Posts/Post";
 import React from "react";
-import {SinglePostType} from "../../../redux/ProfileReducer";
+import {SinglePostType} from "../../../redux/profileReducer";
 import {SendTextForm} from "./SendTextForm";
 
 type MyPostsPropsType = {

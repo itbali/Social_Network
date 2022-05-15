@@ -1,10 +1,11 @@
 import {applyMiddleware, combineReducers, createStore, Store} from "redux";
-import {ProfileReducer} from "./ProfileReducer";
-import {DialogsReducer} from "./DialogsReducer";
-import {SidebarReducer} from "./SidebarReducer";
-import {UsersReducer} from "./UsersReducer";
-import {AuthReducer} from "./AuthReducer";
+import {ProfileReducer} from "./profileReducer";
+import {DialogsReducer} from "./dialogsReducer";
+import {SidebarReducer} from "./sidebarReducer";
+import {UsersReducer} from "./usersReducer";
+import {AuthReducer} from "./authReducer";
 import thunkMiddleware from "redux-thunk";
+import {appReducer} from "./appReducer";
 
 let rootReducer = combineReducers({
     ProfilePage: ProfileReducer,
@@ -12,6 +13,7 @@ let rootReducer = combineReducers({
     SideBar: SidebarReducer,
     UsersPage: UsersReducer,
     Auth: AuthReducer,
+    App: appReducer
 })
 
 export let store: Store = createStore(rootReducer, applyMiddleware(thunkMiddleware))

@@ -5,7 +5,7 @@ import {
     followSuccess, getUsers, setCurrentPages, toggleIsFollowingProgress,
     unFollowSuccess,
     UsersType
-} from "../../redux/UsersReducer";
+} from "../../redux/usersReducer";
 import {RootStateType} from "../../redux/redux-store";
 import Preloader from "../Common/Preloader/Preloader";
 import {usersApi} from "../../api/api";
@@ -98,7 +98,7 @@ export const UsersContainer = compose<React.ComponentType>(
         toggleIsFollowingProgress,
         getUsers
     }),
-    withAuthRedirect
+    // withAuthRedirect
 )(UsersApiComponent)
 
 

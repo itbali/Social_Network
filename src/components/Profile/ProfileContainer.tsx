@@ -1,7 +1,7 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import {Profile} from "./Profile";
 import {connect} from "react-redux";
-import {getStatus, getUserProfile, ProfileType, updateStatus,} from "../../redux/ProfileReducer";
+import {getStatus, getUserProfile, ProfileType, updateStatus,} from "../../redux/profileReducer";
 import {RootStateType} from "../../redux/redux-store";
 import {
     NavigateFunction, Params,
@@ -9,7 +9,6 @@ import {
     useNavigate,
     useParams,
 } from "react-router-dom";
-import {withAuthRedirect} from "../../hoc/WithAuthRedirect";
 import {compose} from "redux";
 
 export type ProfileContainerType = {
@@ -71,5 +70,5 @@ function withRouter(Component: any) {
 export default compose<React.ComponentType>(
     connect(mapStateToProps, {getUserProfile, getStatus, updateStatus}),
     withRouter,
-    withAuthRedirect
+    // withAuthRedirect
 )(ProfileContainer)

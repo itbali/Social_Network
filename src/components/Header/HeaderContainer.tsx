@@ -1,11 +1,8 @@
 import React from "react";
 import {Header} from "./Header";
-import axios from "axios";
 import {connect} from "react-redux";
-import {getUserAuthData, setAuthUserData} from "../../redux/AuthReducer";
-import {ProfileType, setUserProfile} from "../../redux/ProfileReducer";
+import {getAuthUserData} from "../../redux/authReducer";
 import {RootStateType} from "../../redux/redux-store";
-import {usersApi} from "../../api/api";
 
 type HeaderComponentType = {
     id: number | null
@@ -16,9 +13,9 @@ type HeaderComponentType = {
 }
 
 class HeaderContainer extends React.Component<HeaderComponentType> {
-    componentDidMount() {
-        this.props.getUserAuthData()
-    }
+    // componentDidMount() {
+    //     this.props.getUserAuthData()
+    // }
 
     render() {
         return (
@@ -33,4 +30,4 @@ const MapStateToProps = (state: RootStateType) => ({
     login: state.Auth.data.login,
     ava: state.ProfilePage.profile.photos.small,
 })
-export default connect(MapStateToProps, {getUserAuthData})(HeaderContainer)
+export default connect(MapStateToProps, {getUserAuthData: getAuthUserData})(HeaderContainer)

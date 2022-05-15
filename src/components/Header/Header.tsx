@@ -1,8 +1,8 @@
 import s from './Header.module.css'
 import {NavLink} from "react-router-dom";
-import {ProfileType} from "../../redux/ProfileReducer";
+import {ProfileType} from "../../redux/profileReducer";
 import {useDispatch} from "react-redux";
-import {logout} from "../../redux/AuthReducer";
+import {logout} from "../../redux/authReducer";
 
 type HeaderPropsType = {
     isAuth: boolean

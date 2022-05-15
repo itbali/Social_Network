@@ -1,5 +1,5 @@
 import React from 'react';
-import {DialogsPageType, onSendMessageActionCreator} from "../../redux/DialogsReducer";
+import {DialogsPageType, onSendMessageActionCreator} from "../../redux/dialogsReducer";
 import {Dialogs} from "./Dialogs";
 import {compose, Dispatch} from "redux";
 import {connect} from "react-redux";
@@ -31,5 +31,6 @@ let mapDispatchToProps = (dispatch: Dispatch): mapDispatchPropsType => {
 
 export default compose<React.ComponentType>(
     connect(mapStateToProps, mapDispatchToProps),
-    withAuthRedirect)
+    // withAuthRedirect
+)
 (Dialogs)
