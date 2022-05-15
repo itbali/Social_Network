@@ -1,21 +1,20 @@
 import s from './MyPosts.module.css'
 import {Post} from "./Posts/Post";
-import React, {ChangeEvent} from "react";
+import React from "react";
 import {SinglePostType} from "../../../redux/ProfileReducer";
+import {SendTextForm} from "./SendTextForm";
 
 type MyPostsPropsType = {
     Posts: Array<SinglePostType>
-    addPost: () => void
-    onPostChange: (t: string) => void
-    NewPostText: string
+    addPost: (post: string) => void
 }
 
 
 export const MyPosts = (props: MyPostsPropsType) => {
 
 
-    const onAddPost = () => {
-        props.addPost();
+    const onAddPost = (post: string) => {
+        props.addPost(post);
     }
 
     const PostsArray = props.Posts.map(p => {
@@ -29,22 +28,11 @@ export const MyPosts = (props: MyPostsPropsType) => {
         )
     })
 
-    let onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.onPostChange(e.currentTarget.value)
-    }
-
     return (
         <div>
-            My Posts
-            <div className={s.postBlock}>
-                <div>
-                    <textarea onChange={onPostChange} value={props.NewPostText}/>
-                </div>
-                <div>
-                    <button onClick={onAddPost}>Add Post
-                    </button>
-                </div>
-            </div>
+            Мои посты
+            <SendTextForm onSubmitButtonClick={onAddPost} submitButtonName={"Опубликовать"}
+                          type={"textarea"}/>
             <div className={s.Posts}>Posts
                 {PostsArray}
             </div>

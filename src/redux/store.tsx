@@ -86,10 +86,10 @@ const store: storeType = {
     },
 
     dispatch(action: any) {
-        
+
         // @ts-ignore
         this._state.ProfilePage = ProfileReducer(this._state.ProfilePage, action)
-        this._state.DialogsPage = DialogsReducer(this._state.DialogsPage, action)
+        // this._state.DialogsPage = DialogsReducer(this._state.DialogsPage, action)
         this._state.SideBar = SidebarReducer(this._state.SideBar, action)
         this._callSubscriber(this._state);
     }

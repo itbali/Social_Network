@@ -4,8 +4,10 @@ import Preloader from "../Common/Preloader/Preloader";
 import {ProfileType} from "../../redux/ProfileReducer";
 
 type ProfilePropsType = {
-    SetUserProfile: (profile: ProfileType) => void
+    GetUserProfile: (userID: string) => void
     profile: ProfileType
+    status: string
+    updateStatus: (status: string) => void
 }
 
 export const Profile = (props: ProfilePropsType) => {
@@ -14,7 +16,7 @@ export const Profile = (props: ProfilePropsType) => {
     }
     return (
         <div>
-            <ProfileInfo profile={props.profile}/>
+            <ProfileInfo profile={props.profile} status={props.status} updateStatus={props.updateStatus}/>
             <MyPostsContainer/>
         </div>
     )

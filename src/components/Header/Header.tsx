@@ -1,6 +1,8 @@
 import s from './Header.module.css'
 import {NavLink} from "react-router-dom";
 import {ProfileType} from "../../redux/ProfileReducer";
+import {useDispatch} from "react-redux";
+import {logout} from "../../redux/AuthReducer";
 
 type HeaderPropsType = {
     isAuth: boolean
@@ -11,6 +13,12 @@ type HeaderPropsType = {
 }
 
 export const Header = (props: HeaderPropsType) => {
+    let dispatch = useDispatch()
+
+    let logoutClickHandler = () => {
+        dispatch(logout())
+    }
+
     return (
         <header className={s.header}>
             <span className={s.logo}>У Лехи</span>
@@ -20,6 +28,7 @@ export const Header = (props: HeaderPropsType) => {
                     <div>
                         <img src={props.ava} alt="ava"/>
                         <span>{props.login}</span>
+                        <button onClick={logoutClickHandler}>LOGOUT</button>
                     </div>
                     : <NavLink to={'/login'}>LOGIN</NavLink>
                 }

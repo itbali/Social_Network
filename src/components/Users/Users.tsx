@@ -3,7 +3,6 @@ import UserPhoto from "../../assets/images/images.png"
 import s from "./Users.module.css"
 import {UsersType} from "../../redux/UsersReducer";
 import {NavLink} from "react-router-dom";
-import {samuraiApi} from "../../api/api";
 
 type UsersPropsType = {
     totalUserCount: number
@@ -12,9 +11,8 @@ type UsersPropsType = {
     currentPage: number
     users: UsersType
     isFollowingProgress: Array<number>
-    onUnFollowClickHandler: (id: number) => void
-    onFollowClickHandler: (id: number) => void
-    toggleIsFollowingProgress: (isFetching: boolean, id: number) => void
+    unfollow: (id: number) => void
+    follow: (id: number) => void
 
 }
 
@@ -33,11 +31,17 @@ export const Users = (props: UsersPropsType) => {
 
             <div>
                 {pages.map(el => {
+
+                    //counting pages of total users
+
                     return <span key={Math.random()} onClick={(e) => props.onPageChanged(el)}
                                  className={props.currentPage === el ? s.selectedPage : ''}>{el}</span>
                 })}
             </div>
             {
+
+                //showing users
+
                 props.users.map(el => <div className={s.userContainer} key={el.id}>
                     <div className={s.left}>
                         <NavLink to={'/profile/' + el.id}>
@@ -45,26 +49,15 @@ export const Users = (props: UsersPropsType) => {
                                  className={s.avatar}/>
                         </NavLink>
                         {el.followed
+
+                            //checking if user is followed then showing button unfollow
+
                             ? <button onClick={() => {
-                                props.toggleIsFollowingProgress(true, el.id)
-                                samuraiApi.unFollow(el.id)
-                                    .then((data) => {
-                                        if (data.resultCode === 0) {
-                                            props.onUnFollowClickHandler(el.id)
-                                        }
-                                        props.toggleIsFollowingProgress(false, el.id)
-                                    })
+                                props.unfollow(el.id)
                             }} disabled={props.isFollowingProgress.some(id => id === el.id)}>Unfollow</button>
 
                             : <button onClick={() => {
-                                props.toggleIsFollowingProgress(true, el.id)
-                                samuraiApi.follow(el.id)
-                                    .then((data) => {
-                                        if (data.resultCode === 0) {
-                                            props.onFollowClickHandler(el.id)
-                                        }
-                                        props.toggleIsFollowingProgress(false, el.id)
-                                    })
+                                props.follow(el.id)
                             }} disabled={props.isFollowingProgress.some(id => id === el.id)}>Follow</button>
                         }
 

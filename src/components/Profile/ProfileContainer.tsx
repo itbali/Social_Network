@@ -1,7 +1,7 @@
 import React from 'react'
 import {Profile} from "./Profile";
 import {connect} from "react-redux";
-import {ProfileType, SetUserProfile} from "../../redux/ProfileReducer";
+import {getStatus, getUserProfile, ProfileType, updateStatus,} from "../../redux/ProfileReducer";
 import {RootStateType} from "../../redux/redux-store";
 import {
     NavigateFunction, Params,
@@ -9,11 +9,15 @@ import {
     useNavigate,
     useParams,
 } from "react-router-dom";
-import {samuraiApi} from "../../api/api";
+import {withAuthRedirect} from "../../hoc/WithAuthRedirect";
+import {compose} from "redux";
 
 export type ProfileContainerType = {
-    SetUserProfile: (profile: ProfileType) => void
+    getUserProfile: (userID: string) => void
+    getStatus: (userID: string) => void
+    updateStatus: (status: string) => void
     profile: ProfileType
+    status: string
     router: {
         location: Location,
         navigate: NavigateFunction,
@@ -21,26 +25,31 @@ export type ProfileContainerType = {
     }
 }
 
-
 class ProfileContainer extends React.Component<ProfileContainerType> {
 
     componentDidMount() {
-
-        samuraiApi.getProfile(this.props.router.params.userId)
-            .then((data) => {
-                this.props.SetUserProfile(data)
-            })
+        let userID = this.props.router.params.userId
+        if (!userID) {
+            userID = '23016'
+        }
+        this.props.getUserProfile(userID)
+        this.props.getStatus(userID)
     }
 
     render() {
         return (
-            <Profile SetUserProfile={this.props.SetUserProfile} profile={this.props.profile}/>
+            <Profile
+                GetUserProfile={this.props.getUserProfile}
+                profile={this.props.profile}
+                status={this.props.status}
+                updateStatus={this.props.updateStatus}/>
         )
     }
 }
 
 const mapStateToProps = (state: RootStateType) => ({
-    profile: state.ProfilePage.profile
+    profile: state.ProfilePage.profile,
+    status: state.ProfilePage.status,
 })
 
 function withRouter(Component: any) {
@@ -59,5 +68,8 @@ function withRouter(Component: any) {
     return ComponentWithRouterProp;
 }
 
-export default connect(mapStateToProps, {SetUserProfile})(withRouter(ProfileContainer));
-// export default connect(mapStateToProps, {SetUserProfile})(ProfileContainer)
+export default compose<React.ComponentType>(
+    connect(mapStateToProps, {getUserProfile, getStatus, updateStatus}),
+    withRouter,
+    withAuthRedirect
+)(ProfileContainer)

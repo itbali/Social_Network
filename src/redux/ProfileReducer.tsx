@@ -1,6 +1,9 @@
-const UPDATE_CHANGE_TEXT = "UPDATE-CHANGE-TEXT"
+import {Dispatch} from "redux";
+import {profileAPI} from "../api/api";
+
 const ADD_POST = 'ADD-POST';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
+const SET_STATUS = 'SET_STATUS';
 
 export type SinglePostType = {
     id: number, postMessage: string, img: string, likeCount: number
@@ -31,8 +34,8 @@ export type ProfileType = {
 
 export type ProfilePageType = {
     profile: ProfileType
+    status: string
     Posts: SinglePostType[]
-    NewPostText: string
 }
 
 let InitialState: ProfilePageType = {
@@ -58,6 +61,7 @@ let InitialState: ProfilePageType = {
 
         }
     },
+    status: '',
     Posts: [
         {
             id: 1,
@@ -71,29 +75,22 @@ let InitialState: ProfilePageType = {
             img: '',
             likeCount: 4
         }
-    ],
-    NewPostText: 'удалить значение из store.tsx'
+    ]
 }
 
 export const ProfileReducer = (state: ProfilePageType = InitialState, action: ActionsType): ProfilePageType => {
     switch (action.type) {
         case ADD_POST: {
             let newPost = {
-                id: 5,
-                postMessage: state.NewPostText,
+                id: Math.random(),
+                postMessage: action.post,
                 img: '',
                 likeCount: 0
             }
-            state.NewPostText = ''
             return {...state, Posts: [...state.Posts, newPost]}
         }
-
-        case UPDATE_CHANGE_TEXT: {
-            if (action.newText.trim() != null) {
-                return {...state, NewPostText: action.newText.trim()}
-            } else return state
-        }
-
+        case SET_STATUS:
+            return {...state, status: action.status}
         case "SET_USER_PROFILE":
             return {...state, profile: action.profile}
         default:
@@ -102,17 +99,40 @@ export const ProfileReducer = (state: ProfilePageType = InitialState, action: Ac
 }
 
 type ActionsType =
-    ReturnType<typeof AddPostActionCreator>
-    | ReturnType<typeof onPostChangeActionCreator>
-    | ReturnType<typeof SetUserProfile>
+    ReturnType<typeof addPost>
+    | ReturnType<typeof setUserProfile>
+    | ReturnType<typeof setStatus>
 
-export const AddPostActionCreator = () =>
-    ({type: ADD_POST} as const)
+export const addPost = (post: string) =>
+    ({type: ADD_POST, post} as const)
 
-export const onPostChangeActionCreator = (text: string) =>
-    ({type: UPDATE_CHANGE_TEXT, newText: text} as const)
-
-export const SetUserProfile = (profile: ProfileType) => ({
+export const setUserProfile = (profile: ProfileType) => ({
     type: SET_USER_PROFILE, profile
 } as const)
+export const setStatus = (status: string) => ({
+    type: SET_STATUS, status
+} as const)
+
+//thunks
+export const getUserProfile = (userID: string) => (dispatch: Dispatch) => {
+    profileAPI.getProfile(userID)
+        .then((data) => {
+            dispatch(setUserProfile(data))
+        })
+}
+export const getStatus = (userID: string) => (dispatch: Dispatch) => {
+    profileAPI.getStatus(userID)
+        .then((data) => {
+            dispatch(setStatus(data))
+        })
+}
+export const updateStatus = (status: string) => (dispatch: Dispatch) => {
+    profileAPI.updateStatus(status)
+        .then((data) => {
+            if (data.resultCode === 0) {
+                console.log('resultCode=0')
+                dispatch(setStatus(status))
+            }
+        })
+}
 

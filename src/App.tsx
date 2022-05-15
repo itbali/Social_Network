@@ -6,10 +6,12 @@ import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
 import {News} from "./components/News/News";
 import {Dispatch, Store} from "redux";
-import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
+import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import {UsersContainer} from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
+import Login from "./components/Login/Login";
+import ProtectedRoute from "./ProtectedRoute";
 
 type AppPropsType = {
     dispatch: Dispatch
@@ -24,20 +26,26 @@ const App = (props: AppPropsType) => {
             <Navbar/>
             <div className='app-wrapper-content'>
                 <Routes>
-                    <Route path='/profile'
-                           element={<ProfileContainer/>}>
-                        <Route path='/profile/:userId'
-                               element={<ProfileContainer/>}/>
+                    <Route element={<ProtectedRoute/>}>
+                        <Route
+                            path='/profile'
+                            element={<ProfileContainer key={'me'}/>}
+                        >
+                            <Route
+                                path='/profile/:userId'
+                                element={<ProfileContainer key={'users'}/>}
+                            />
+                        </Route>
+                        <Route
+                            path='/dialogs/*'
+                            element={<DialogsContainer/>}
+                        />
+                        <Route path='/news' element={<News/>}/>
+                        <Route path='/users' element={<UsersContainer/>}/>
+                        <Route path='/music' element={<Music/>}/>
+                        <Route path='/settings' element={<Settings/>}/>
                     </Route>
-                    <Route path='/dialogs/*'
-                           element={<DialogsContainer
-                               // dialogsPage={props.store.getState().DialogsPage}
-                               // dispatch={props.dispatch}
-                           />}/>
-                    <Route path='/news' element={<News/>}/>
-                    <Route path='/users' element={<UsersContainer/>}/>
-                    <Route path='/music' element={<Music/>}/>
-                    <Route path='/settings' element={<Settings/>}/>
+                    <Route path='/login' element={<Login/>}/>
                 </Routes>
             </div>
         </div>
