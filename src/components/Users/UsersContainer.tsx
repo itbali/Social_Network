@@ -2,15 +2,13 @@ import React from 'react';
 import {connect} from "react-redux";
 import {Users} from "./Users";
 import {
-    followSuccess, getUsers, setCurrentPages, toggleIsFollowingProgress,
+    followSuccess, requestUsers, setCurrentPages, toggleIsFollowingProgress,
     unFollowSuccess,
     UsersType
 } from "../../redux/usersReducer";
 import {RootStateType} from "../../redux/redux-store";
 import Preloader from "../Common/Preloader/Preloader";
-import {usersApi} from "../../api/api";
 import {compose} from "redux";
-import {withAuthRedirect} from "../../hoc/WithAuthRedirect";
 
 export type UserPropsType = mapStateType & mapDispatchType
 
@@ -21,7 +19,7 @@ export class UsersApiComponent extends React.Component<UserPropsType> {
 
         // this.props.toggleIsFetching(true)
         //
-        // usersApi.getUsers(this.props.currentPage, this.props.pageSize)
+        // usersApi.requestUsers(this.props.currentPage, this.props.pageSize)
         //     .then((response) => {
         //         this.props.toggleIsFetching(false)
         //         this.props.setUsers(response.items);
@@ -36,7 +34,7 @@ export class UsersApiComponent extends React.Component<UserPropsType> {
 
         // this.props.setCurrentPages(pageNumber);
         // this.props.toggleIsFetching(true)
-        // usersApi.getUsers(pageNumber, this.props.pageSize)
+        // usersApi.requestUsers(pageNumber, this.props.pageSize)
         //     .then((response) => {
         //         this.props.toggleIsFetching(false)
         //         this.props.setUsers(response.items);
@@ -96,7 +94,7 @@ export const UsersContainer = compose<React.ComponentType>(
         unFollow: unFollowSuccess,
         setCurrentPages,
         toggleIsFollowingProgress,
-        getUsers
+        getUsers: requestUsers
     }),
     // withAuthRedirect
 )(UsersApiComponent)
@@ -107,5 +105,5 @@ export const UsersContainer = compose<React.ComponentType>(
 //     unFollow: unFollowSuccess,
 //     setCurrentPages,
 //     toggleIsFollowingProgress,
-//     getUsers
+//     requestUsers
 // })(UsersApiComponent);

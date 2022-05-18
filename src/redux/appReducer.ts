@@ -6,9 +6,7 @@ export type appReducerStateType = {
     initialized: boolean
 }
 
-let InitialState: appReducerStateType = {
-    initialized: false
-}
+let InitialState: appReducerStateType = {initialized: false}
 
 export const appReducer = (state: appReducerStateType = InitialState, action: ActionsType): appReducerStateType => {
     switch (action.type) {
@@ -21,9 +19,7 @@ export const appReducer = (state: appReducerStateType = InitialState, action: Ac
 
 type ActionsType = ReturnType<typeof initializedSuccess>
 
-const initializedSuccess = () => {
-    return ({type: INITIALIZED_SUCCESS} as const)
-}
+const initializedSuccess = () => ({type: INITIALIZED_SUCCESS} as const)
 
 export const initializeApp = () => (dispatch: any) => {
     let promise = dispatch(getAuthUserData());

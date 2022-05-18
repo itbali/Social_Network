@@ -1,11 +1,11 @@
-import React, {useState, FocusEvent, ChangeEvent, useEffect} from "react";
+import React, {useState, ChangeEvent, useEffect} from "react";
 
 type ProfileStatusPropsType = {
     status: string
     updateStatus: (status: string) => void
 }
 
-export function ProfileStatus(props: ProfileStatusPropsType) {
+export const ProfileStatus = React.memo((props: ProfileStatusPropsType) => {
 
     let [localState, setLocaleState] = useState({
         editMode: false,
@@ -17,12 +17,12 @@ export function ProfileStatus(props: ProfileStatusPropsType) {
         if (localState.status !== props.status) {
             setLocaleState({...localState, status: props.status})
         }
-    }, [props.status])
+    }, [localState, props.status])
 
     let activateEditMode = () => {
         setLocaleState({...localState, editMode: true})
     }
-    let deactivateEditMode = (e: FocusEvent<HTMLInputElement>) => {
+    let deactivateEditMode = () => {
         setLocaleState({...localState, editMode: false})
         props.updateStatus(localState.status)
     }
@@ -50,4 +50,4 @@ export function ProfileStatus(props: ProfileStatusPropsType) {
         </div>
 
     );
-}
+});
