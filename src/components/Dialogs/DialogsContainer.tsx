@@ -1,9 +1,9 @@
 import React from 'react';
-import {DialogsPageType, onSendMessageActionCreator} from "../../redux/dialogsReducer";
+import {DialogsPageType, onSendMessage} from "../../redux/dialogsReducer";
 import {Dialogs} from "./Dialogs";
 import {compose, Dispatch} from "redux";
 import {connect} from "react-redux";
-import {RootStateType} from "../../redux/redux-store";
+import {RootStateType} from "../../redux/store";
 import {withAuthRedirect} from "../../hoc/WithAuthRedirect";
 
 type MapStateType = {
@@ -24,7 +24,7 @@ let mapStateToProps = (state: RootStateType): MapStateType => {
 let mapDispatchToProps = (dispatch: Dispatch): mapDispatchPropsType => {
     return {
         sendMessage: (text: string) => {
-            dispatch(onSendMessageActionCreator(text))
+            dispatch(onSendMessage(text))
         }
     }
 }

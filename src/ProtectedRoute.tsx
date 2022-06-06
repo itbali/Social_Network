@@ -1,6 +1,6 @@
 import {Navigate, Outlet, useLocation} from "react-router";
 import {useSelector} from "react-redux";
-import {RootStateType} from "./redux/redux-store";
+import {RootStateType} from "./redux/store";
 
 const useAuth = () => {
     return useSelector<RootStateType, boolean>(state => state.Auth.data.isAuth)

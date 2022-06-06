@@ -2,7 +2,7 @@ import React from "react";
 import {Header} from "./Header";
 import {connect} from "react-redux";
 import {getAuthUserData} from "../../redux/authReducer";
-import {RootStateType} from "../../redux/redux-store";
+import {RootStateType} from "../../redux/store";
 
 type HeaderComponentType = {
     id: number | null

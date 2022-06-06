@@ -2,7 +2,7 @@ import React, {useEffect} from 'react'
 import {Profile} from "./Profile";
 import {connect} from "react-redux";
 import {getStatus, getUserProfile, ProfileType, updateStatus,} from "../../redux/profileReducer";
-import {RootStateType} from "../../redux/redux-store";
+import {RootStateType} from "../../redux/store";
 import {
     NavigateFunction, Params,
     useLocation,

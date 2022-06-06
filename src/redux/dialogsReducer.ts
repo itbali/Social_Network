@@ -39,8 +39,12 @@ export const DialogsReducer = (state: DialogsPageType = InitialState, action: Ac
         // }
         case 'SEND_MESSAGE': {
             let newMessage = action.newText
-            id++
-            return {...state, messageData: [...state.messageData, {id, message: newMessage}]}
+            if (newMessage.trim().length !== 0) {
+                id++
+                return {...state, messageData: [...state.messageData, {id, message: newMessage}]}
+            } else {
+                return state
+            }
         }
         default:
             return state
@@ -48,10 +52,10 @@ export const DialogsReducer = (state: DialogsPageType = InitialState, action: Ac
 }
 type ActionsType =
 // ReturnType<typeof onMessageChangeTextActionCreator> |
-    ReturnType<typeof onSendMessageActionCreator>
+    ReturnType<typeof onSendMessage>
 
 // export const onMessageChangeTextActionCreator = (text: string) =>
 //     ({type: ADD_MESSAGE_TEXT, newText: text} as const)
-export const onSendMessageActionCreator = (newText: string) =>
+export const onSendMessage = (newText: string) =>
     ({type: SEND_MESSAGE, newText} as const)
 
